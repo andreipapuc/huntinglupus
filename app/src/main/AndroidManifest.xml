@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.andreicarlopapuc.huntinglupus"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <!-- Internet Perms -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
+    <application
+        android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainScreenActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Admin All Product Activity -->
+        <activity
+            android:name=".AdminAllProductsActivity"
+            android:label="All Admin Products" >
+        </activity>
+
+        <!-- User All Product Activity -->
+        <activity
+            android:name=".UserAllProductsActivity"
+            android:label="@string/title_activity_user_all_products" >
+        </activity>
+
+        <!-- Add Product Activity -->
+        <activity
+            android:name=".NewProductActivity"
+            android:label="Add New Product" >
+        </activity>
+
+        <!-- Edit Product Actity -->
+
+        <activity
+            android:name=".EditProductActivity"
+            android:label="Edit Product" >
+        </activity>
+        <!-- User Main Activity -->
+        <activity
+            android:name=".UserMainActivity"
+            android:label="@string/title_activity_user_main" >
+        </activity>
+        <!-- Admin Main Activity -->
+        <activity
+            android:name=".AdminMainActivity"
+            android:label="Admin Main Activity" >
+        </activity>
+
+    </application>
+
+</manifest>

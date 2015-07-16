@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Name Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/inputPid"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Input Name -->
+    <EditText android:id="@+id/inputName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_below="@+id/textView7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Category Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/inputName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Input Category
+    <EditText android:id="@+id/inputCategory"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true" />    -->
+
+    <!-- Input Category Type CheckBox -->
+    <CheckBox
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="Tool"
+        android:id="@+id/inputCategoryTool"
+        android:checked="false"
+        android:textSize="17dip"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Description Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/inputCategoryTool"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Input description -->
+    <EditText android:id="@+id/inputDesc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:lines="4"
+        android:gravity="top"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!--   <LinearLayout android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_alignParentLeft="true"
+           android:layout_marginLeft="0dp"
+           android:layout_alignParentTop="true"
+           android:layout_marginTop="880dp">
+
+       </LinearLayout>  -->
+    <!-- Product ID Label -->
+    <TextView
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:text="Product ID"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:id="@+id/productId"
+        android:textSize="17dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
+    <!-- Product ID Input -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/inputPid"
+        android:layout_below="@+id/productId"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <!-- Button Save Product -->
+    <Button android:id="@+id/btnSave"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Changes"
+        android:layout_weight="1"
+        android:layout_below="@+id/inputDesc"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="173dp"
+        android:layout_marginEnd="173dp" />
+
+    <!-- Button Delete Product -->
+    <Button android:id="@+id/btnDelete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_weight="1"
+        android:layout_below="@+id/inputDesc"
+        android:layout_toRightOf="@+id/inputCategoryTool"
+        android:layout_toEndOf="@+id/inputCategoryTool"
+        android:layout_marginLeft="117dp"
+        android:layout_marginStart="117dp" />
+
+    <!-- Check Box Furniture -->
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Furniture"
+        android:textSize="17dip"
+        android:id="@+id/inputCategoryFurniture"
+        android:layout_below="@+id/textView5"
+        android:layout_alignRight="@+id/btnSave"
+        android:layout_alignEnd="@+id/btnSave"
+        android:checked="false" />
+
+</RelativeLayout>
