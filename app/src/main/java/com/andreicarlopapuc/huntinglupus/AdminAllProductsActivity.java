@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 public class AdminAllProductsActivity extends ListActivity {
 
-    //poop is very good
+    //poop is not very good
 
     // Progress Dialog
     private ProgressDialog pDialog;
