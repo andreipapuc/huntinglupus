@@ -34,7 +34,7 @@ public class NewProductActivity extends Activity {
 
     // url set to current wamp server, replace when you get to host server on another platform
     // url to create new product
-    private static String url_create_product = "http://192.168.1.3/hl_androidcon/create_product.php";
+    private static String url_create_product = "http://10.10.9.216/hl_androidcon/create_product.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
