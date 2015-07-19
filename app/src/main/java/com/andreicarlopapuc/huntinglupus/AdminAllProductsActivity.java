@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 public class AdminAllProductsActivity extends ListActivity {
 
-    // NANANANANANANANANA
+    // LAWL
 
     // Progress Dialog
     private ProgressDialog pDialog;
