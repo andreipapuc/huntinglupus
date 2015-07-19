@@ -57,8 +57,8 @@
         android:layout_width="155dp"
         android:layout_height="142dp"
         android:id="@+id/imageView"
-        android:src="@drawable/huskybitslogonull"
-        android:layout_weight="0.14" />
+        android:layout_weight="0.14"
+        android:src="@drawable/huskybitslogonull" />
 
     <Button android:id="@+id/btnUserMode"
         android:layout_width="fill_parent"
