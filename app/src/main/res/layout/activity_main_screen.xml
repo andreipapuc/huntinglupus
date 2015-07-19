@@ -41,7 +41,6 @@
         android:id="@+id/textMotto"
         android:layout_gravity="center_horizontal"
         android:textColor="#1c1c1c" />
-
     <ImageView
         android:layout_width="155dp"
         android:layout_height="142dp"
