@@ -3,15 +3,68 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:weightSum="1">
 
     <!--  Sample Dashboard screen with Two buttons -->
     <!--  Button to view all products screen -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Welcome to "
+        android:id="@+id/textWelcome"
+        android:textColor="#1c1c1c"
+        android:textStyle="bold"
+        android:paddingTop="20dp"
+        android:textIsSelectable="false"
+        android:textSize="32dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Project HUNTING LUPUS"
+        android:id="@+id/textHuntingLupus"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="50dp"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="The Best Way To Organise A Workspace"
+        android:id="@+id/textMotto"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#1c1c1c" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="By"
+        android:id="@+id/textBy"
+        android:layout_marginRight="170dp"
+        android:autoText="false"
+        android:textSize="17dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp" />
+
+    <ImageView
+        android:layout_width="155dp"
+        android:layout_height="142dp"
+        android:id="@+id/imageView"
+        android:layout_weight="0.14"
+        android:src="@drawable/huskybitslogonull" />
+
     <Button android:id="@+id/btnUserMode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="User Mode"
-        android:layout_marginTop="25dip"/>
+        android:layout_marginTop="25dip" />
 
     <!--  Button to create a new product screen -->
     <Button android:id="@+id/btnAdminMode"
