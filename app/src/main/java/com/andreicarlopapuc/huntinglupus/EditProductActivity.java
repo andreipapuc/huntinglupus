@@ -60,6 +60,8 @@ public class EditProductActivity extends Activity {
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_DESCRIPTION = "description";
 
+    // boop
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
