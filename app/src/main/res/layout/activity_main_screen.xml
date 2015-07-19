@@ -41,24 +41,13 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#1c1c1c" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="By"
-        android:id="@+id/textBy"
-        android:layout_marginRight="170dp"
-        android:autoText="false"
-        android:textSize="17dp"
-        android:paddingTop="15dp"
-        android:paddingLeft="15dp" />
-
     <ImageView
         android:layout_width="155dp"
         android:layout_height="142dp"
         android:id="@+id/imageView"
         android:layout_weight="0.14"
-        android:src="@drawable/huskybitslogonull" />
+        android:src="@drawable/huskybitslogonull"
+        android:paddingTop="20dp" />
 
     <Button android:id="@+id/btnUserMode"
         android:layout_width="fill_parent"
