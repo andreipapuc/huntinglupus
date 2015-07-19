@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
+//change
+
 public class EditProductActivity extends Activity {
 
     EditText txtName;
