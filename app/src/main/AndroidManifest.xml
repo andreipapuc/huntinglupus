@@ -48,6 +48,12 @@
             android:label="@string/title_activity_user_all_products" >
         </activity>
 
+        <!-- User All Products EXPANDABLE list -->
+        <activity
+            android:name=".UserAllProductsEXPANDABLElist"
+            android:label="ListView Version" >
+        </activity>
+
         <!-- Add Product Activity -->
         <activity
             android:name=".NewProductActivity"
@@ -69,6 +75,18 @@
         <activity
             android:name=".AdminMainActivity"
             android:label="Admin Main Activity" >
+        </activity>
+
+        <!-- Data Provider -->
+        <activity
+            android:name=".DataProvider"
+            android:label="Expandable ListView Component" >
+        </activity>
+
+        <!-- Products Category List -->
+        <activity
+            android:name=".ProductsCategoryList"
+            android:label="Expandable ListView Purpose" >
         </activity>
 
     </application>
