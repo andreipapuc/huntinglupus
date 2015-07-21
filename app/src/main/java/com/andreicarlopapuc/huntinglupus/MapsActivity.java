@@ -3,20 +3,51 @@ package com.andreicarlopapuc.huntinglupus;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
 
+    private static final LatLng NOD = new LatLng(44.412016, 26.118236);
+    private LatLngBounds SPLAI = new LatLngBounds(
+            new LatLng(44.411384, 26.117199), new LatLng(44.412844, 26.118932));
+
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+
+        /*   private LatLngBounds AUSTRALIA = new LatLngBounds(
+            new LatLng(-44, 113), new LatLng(-10, 154));
+        */
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        // Set the camera to the greatest possible zoom level that includes the
+        // bounds
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SPLAI.getCenter(),1));
+        /*
+// Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
+// Zoom out to zoom level 10, animating with a duration of 2 seconds.
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        */
+// Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
+       /* CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(MOUNTAIN_VIEW)      // Sets the center of the map to Mountain View
+                .zoom(17)                   // Sets the zoom
+                .bearing(90)                // Sets the orientation of the camera to east
+                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); */
     }
 
     @Override
