@@ -24,15 +24,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
-
-    public class DataProvider extends ListActivity {
+public class DataProvider extends ListActivity {
 
         // Creating JSON Parser object
         JSONParser jParser = new JSONParser();
+        ArrayList<HashMap<String, List<String>>> productsList ;
 
-        ArrayList<HashMap<String, String>> productsList;
+       // ArrayList<HashMap<String, String>> productsList;
         // url set to current wamp server, replace when you get to host server on another platform
         // url to get all products list
         private static String url_all_products = "http://192.168.1.11/hl_androidcon/get_all_products.php";
@@ -42,11 +43,13 @@ import java.util.List;
         private static final String TAG_PRODUCTS = "products";
         private static final String TAG_IDNUM = "idnum";
         private static final String TAG_NAME = "name";
+        private static final String TAG_DESCR = "description";
+        private static final String TAG_CAT = "category";
 
         // products JSONArray
         JSONArray products = null;
 
-        protected ArrayList<HashMap<String, String>> doInBackground(String... args) {
+        protected ArrayList<HashMap<String, List<String>>> doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // getting JSON string from URL
@@ -71,16 +74,26 @@ import java.util.List;
                         // Storing each json item in variable
                         String id = c.getString(TAG_IDNUM);
                         String name = c.getString(TAG_NAME);
+                        String description = c.getString(TAG_DESCR);
+                        String category = c.getString(TAG_CAT);
 
                         // creating new HashMap
-                        HashMap<String, String> map = new HashMap<String, String>();
+                        //HashMap<String, String> map = new HashMap<String, String>();
+                        HashMap<String, List<String>> ThingDetails = new HashMap<String, List<String>>();
 
-                        // adding each child node to HashMap key => value
+
+                        List<String> Stuff = new ArrayList<String>();
+                        Stuff.add(category);
+                        Stuff.add(description);
+
+                        ThingDetails.put(name, Stuff);
+
+                       /* // adding each child node to HashMap key => value
                         map.put(TAG_IDNUM, id);
-                        map.put(TAG_NAME, name);
+                        map.put(TAG_NAME, name); */
 
                         // adding HashList to ArrayList
-                        productsList.add(map);
+                        productsList.add(ThingDetails);
                     }
                     return productsList;
                 } else {

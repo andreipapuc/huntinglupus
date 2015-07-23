@@ -2,22 +2,43 @@ package com.andreicarlopapuc.huntinglupus;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class MapsActivity extends FragmentActivity
+            implements  OnMapReadyCallback {
+
+    private static final int TRANSPARENCY_MAX = 100;
     private static final LatLng NOD = new LatLng(44.412016, 26.118236);
     private LatLngBounds SPLAI = new LatLngBounds(
             new LatLng(44.411384, 26.117199), new LatLng(44.412844, 26.118932));
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private final List<BitmapDescriptor> mImages = new ArrayList<BitmapDescriptor>();
+
+    private int mCurrentEntry = 0;
+
+    private GroundOverlay mGroundOverlay;
+    private SeekBar mTransparencyBar;
+
+
+
+    private GoogleMap map; // Might be null if Google Play services APK is not available.
 
         /*   private LatLngBounds AUSTRALIA = new LatLngBounds(
             new LatLng(-44, 113), new LatLng(-10, 154));
@@ -29,25 +50,38 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        setUpMapIfNeeded();
+
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+
+      /*  setUpMapIfNeeded();
         // Set the camera to the greatest possible zoom level that includes the
         // bounds
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SPLAI.getCenter(),1));
-        /*
-// Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-
-// Zoom out to zoom level 10, animating with a duration of 2 seconds.
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(SPLAI.getCenter(),17));
         */
-// Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
-       /* CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(MOUNTAIN_VIEW)      // Sets the center of the map to Mountain View
-                .zoom(17)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
-                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition)); */
+
+    }
+    @Override
+    protected void onMapReady(map) {
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(NOD, 11));
+
+        mImages.clear();
+        mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_nj_1922));
+     //   mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_prudential_sunny));
+
+
+        mGroundOverlay = map.addGroundOverlay(new GroundOverlayOptions()
+                .image(mImages.get(mCurrentEntry)).anchor(0, 1)
+                .position(NOD, 8600f, 6500f));
+
+
+
+        // Override the default content description on the view, for accessibility mode.
+        // Ideally this string would be localised.
+        map.setContentDescription("Google Map with ground overlay.");
     }
 
     @Override
@@ -59,7 +93,7 @@ public class MapsActivity extends FragmentActivity {
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
+     * call {@link #setUpMap()} once when {@link #map} is not null.
      * <p>
      * If it isn't installed {@link SupportMapFragment} (and
      * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
@@ -73,12 +107,12 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
+        if (map == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
-            if (mMap != null) {
+            if (map != null) {
                 setUpMap();
             }
         }
@@ -88,9 +122,9 @@ public class MapsActivity extends FragmentActivity {
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
      * <p>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
+     * This should only be called once and when we are sure that {@link #map} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 }
