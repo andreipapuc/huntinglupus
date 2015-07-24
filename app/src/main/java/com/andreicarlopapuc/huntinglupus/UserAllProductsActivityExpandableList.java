@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 public class UserAllProductsActivityExpandableList extends Activity {
 
+
     List<String> groupList;
     List<String> childList;
     Map<String, List<String>> productCollection;
