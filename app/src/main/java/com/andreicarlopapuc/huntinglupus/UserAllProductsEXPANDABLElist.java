@@ -1,33 +1,36 @@
 package com.andreicarlopapuc.huntinglupus;
 
+/**
+ * Created by Alex on 7/25/2015.
+ */
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+        import java.util.HashMap;
+        import java.util.LinkedHashMap;
+        import java.util.List;
+        import java.util.Map;
 
-import com.andreicarlopapuc.huntinglupus.adapters.ExpandableListAdapter;
+        import com.andreicarlopapuc.huntinglupus.adapters.ExpandableListAdapter;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.Toast;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.os.StrictMode;
+        import android.util.DisplayMetrics;
+        import android.util.Log;
+        import android.view.Menu;
+        import android.view.View;
+        import android.widget.ExpandableListView;
+        import android.widget.ExpandableListView.OnChildClickListener;
+        import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.apache.http.NameValuePair;
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
 
-public class UserAllProductsActivityExpandableList extends Activity {
-
+public class UserAllProductsEXPANDABLElist extends Activity {
 
     List<String> groupList;
     List<String> childList;
