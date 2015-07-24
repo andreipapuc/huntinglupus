@@ -61,7 +61,7 @@
 
         <!-- User All Products EXPANDABLE list -->
         <activity
-            android:name=".UserAllProductsEXPANDABLElist"
+            android:name=".UserAllProductsExpandableList"
             android:label="ListView Version" >
         </activity>
 
@@ -88,13 +88,6 @@
             android:label="Admin Main Activity" >
         </activity>
 
-        <!-- Data Provider -->
-
-        <!-- Products Category List -->
-        <activity
-            android:name=".ProductsCategoryList"
-            android:label="Expandable ListView Purpose" >
-        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -36,7 +36,7 @@ public class UserAllProductsActivity extends ListActivity  {
     ArrayList<HashMap<String, String>> productsList;
     // url set to current wamp server, replace when you get to host server on another platform
     // url to get all products list
-    private static String url_all_products = "http://10.10.10.149/hl_androidcon/get_all_products.php";
+    private static String url_all_products = "http://192.168.1.11/hl_androidcon/get_all_products.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
