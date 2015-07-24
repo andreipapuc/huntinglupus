@@ -25,7 +25,7 @@ public class UserMainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 // Launching All products Activity
-                Intent i = new Intent(getApplicationContext(), UserAllProductsExpandableList.class);
+                Intent i = new Intent(getApplicationContext(), UserAllProductsActivityExpandableList.class);
                 startActivity(i);
 
             }

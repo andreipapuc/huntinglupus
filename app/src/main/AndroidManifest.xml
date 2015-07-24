@@ -59,9 +59,9 @@
             android:label="@string/title_activity_user_all_products" >
         </activity>
 
-        <!-- User All Products EXPANDABLE list -->
+        <!-- User All Products Activity Expandable List -->
         <activity
-            android:name=".UserAllProductsExpandableList"
+            android:name=".UserAllProductsActivityExpandableList"
             android:label="ListView Version" >
         </activity>
 

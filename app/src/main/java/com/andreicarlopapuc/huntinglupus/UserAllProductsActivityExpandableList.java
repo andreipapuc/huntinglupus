@@ -26,7 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class UserAllProductsExpandableList extends Activity {
+public class UserAllProductsActivityExpandableList extends Activity {
 
     List<String> groupList;
     List<String> childList;
