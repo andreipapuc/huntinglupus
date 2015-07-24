@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
+//General push
+
 public class NewProductActivity extends Activity {
 
     // Progress Dialog

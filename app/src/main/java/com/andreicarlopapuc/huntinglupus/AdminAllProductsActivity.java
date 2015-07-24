@@ -23,10 +23,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class AdminAllProductsActivity extends ListActivity {
+//General push
 
-    // LAWL
-    // jkfhd
+public class AdminAllProductsActivity extends ListActivity {
 
     // Progress Dialog
     private ProgressDialog pDialog;

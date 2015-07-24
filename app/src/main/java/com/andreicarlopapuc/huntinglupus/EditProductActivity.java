@@ -21,7 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
-//change
+//General push
 
 public class EditProductActivity extends Activity {
 
