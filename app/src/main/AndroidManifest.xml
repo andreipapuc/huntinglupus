@@ -61,7 +61,7 @@
 
         <!-- User All Products Activity Expandable List -->
         <activity
-            android:name=".UserAllProductsEXPANDABLElist"
+            android:name=".UserAllProductsExpandableList"
             android:label="ListView Version" >
         </activity>
 
