@@ -1,6 +1,7 @@
 package com.andreicarlopapuc.huntinglupus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +9,21 @@ import java.util.Map;
 import com.andreicarlopapuc.huntinglupus.adapters.ExpandableListAdapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class UserAllProductsEXPANDABLElist extends Activity {
@@ -24,10 +33,32 @@ public class UserAllProductsEXPANDABLElist extends Activity {
     Map<String, List<String>> productCollection;
     ExpandableListView expListView;
 
+    // Creating JSON Parser object
+    JSONParser jParser = new JSONParser();
+
+    private static String url_all_products = "http://10.10.10.149/hl_androidcon/get_all_products.php";
+
+
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_PRODUCTS = "products";
+    private static final String TAG_IDNUM = "idnum";
+    private static final String TAG_NAME = "name";
+    private static final String TAG_CATEGORY = "category";
+    private static final String TAG_DESCR = "description";
+
+    // products JSONArray
+    JSONArray products = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_expandable);
+
+        //fix networkosonmainthread error
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         createGroupList();
 
@@ -56,16 +87,102 @@ public class UserAllProductsEXPANDABLElist extends Activity {
 
     private void createGroupList() {
         groupList = new ArrayList<String>();
-        groupList.add("HP");
-        groupList.add("Dell");
-        groupList.add("Lenovo");
-        groupList.add("Sony");
-        groupList.add("HCL");
-        groupList.add("Samsung");
+
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        // getting JSON string from URL
+        JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+
+        // Check your log cat for JSON reponse
+        Log.d("All Products: ", json.toString());
+
+        try {
+            // Checking for SUCCESS TAG
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                // products found
+                // Getting Array of Products
+                products = json.getJSONArray(TAG_PRODUCTS);
+
+                // looping through All Products
+                for (int i = 0; i < products.length(); i++) {
+                    JSONObject c = products.getJSONObject(i);
+
+                    // Storing each json item in variable
+                    String id = c.getString(TAG_IDNUM);
+                    String name = c.getString(TAG_NAME);
+
+                    groupList.add(name);
+
+
+
+                   /* // creating new HashMap
+                    HashMap<String, String> map = new HashMap<String, String>();
+
+                    // adding each child node to HashMap key => value
+                    map.put(TAG_IDNUM, id);
+                    map.put(TAG_NAME, name); */
+
+                    // adding HashList to ArrayList
+                    //productsList.add(map);
+                }
+            } else {
+                // no products found
+                // Launch Add New product Activity
+                Intent i = new Intent(getApplicationContext(),
+                        NewProductActivity.class);
+                // Closing all previous activities
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void createCollection() {
-        // preparing laptops collection(child)
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        // getting JSON string from URL
+        JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+
+        productCollection = new LinkedHashMap<String, List<String>>();
+
+        // Check your log cat for JSON reponse
+        Log.d("All Products: ", json.toString());
+
+        try {
+            // Checking for SUCCESS TAG
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                // products found
+                // Getting Array of Products
+                products = json.getJSONArray(TAG_PRODUCTS);
+
+                // looping through All Products
+                for (int i = 0; i < products.length(); i++) {
+                    JSONObject c = products.getJSONObject(i);
+
+                    // Storing each json item in variable
+                    String id = c.getString(TAG_IDNUM);
+                    String name = c.getString(TAG_NAME);
+                    String category = c.getString(TAG_CATEGORY);
+                    String description = c.getString(TAG_DESCR);
+
+                    String[] productChildDetails = {category,description};
+                    loadChild(productChildDetails);
+
+                    productCollection.put(name, childList);
+
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*// preparing laptops collection(child)
         String[] hpModels = { "HP Pavilion G6-2014TX", "ProBook HP 4540",
                 "HP Envy 4-1025TX" };
         String[] hclModels = { "HCL S2101", "HCL L2102", "HCL V2002" };
@@ -85,7 +202,7 @@ public class UserAllProductsEXPANDABLElist extends Activity {
                 loadChild(dellModels);
             else if (laptop.equals("Sony"))
                 loadChild(sonyModels);
-            else if (laptop.equals("HCL"))
+            else if (laptop .equals("HCL"))
                 loadChild(hclModels);
             else if (laptop.equals("Samsung"))
                 loadChild(samsungModels);
@@ -93,13 +210,13 @@ public class UserAllProductsEXPANDABLElist extends Activity {
                 loadChild(lenovoModels);
 
             productCollection.put(laptop, childList);
-        }
+        } */
     }
 
-    private void loadChild(String[] laptopModels) {
+    private void loadChild(String[] productChildDetails) {
         childList = new ArrayList<String>();
-        for (String model : laptopModels)
-            childList.add(model);
+        for (String product : productChildDetails)
+            childList.add(product);
     }
 
     private void setGroupIndicatorToRight() {

@@ -22,11 +22,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Map<String, List<String>> productCollections;
     private List<String> products;
 
-    public ExpandableListAdapter(Activity context, List<String> laptops,
-                                 Map<String, List<String>> laptopCollections) {
+    public ExpandableListAdapter(Activity context, List<String> products,
+                                 Map<String, List<String>> productCollections) {
         this.context = context;
-        this.productCollections = laptopCollections;
-        this.products = laptops;
+        this.productCollections = productCollections;
+        this.products = products;
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -40,7 +40,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public View getChildView(final int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final String laptop = (String) getChild(groupPosition, childPosition);
+        final String products = (String) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
@@ -50,7 +50,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView item = (TextView) convertView.findViewById(R.id.product);
 
 
-        item.setText(laptop);
+        item.setText(products);
         return convertView;
     }
 
@@ -72,7 +72,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String laptopName = (String) getGroup(groupPosition);
+        String productName = (String) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -81,7 +81,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView item = (TextView) convertView.findViewById(R.id.product);
         item.setTypeface(null, Typeface.BOLD);
-        item.setText(laptopName);
+        item.setText(productName);
         return convertView;
     }
 
