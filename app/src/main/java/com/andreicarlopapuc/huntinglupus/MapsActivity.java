@@ -2,8 +2,8 @@ package com.andreicarlopapuc.huntinglupus;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,7 +11,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -65,11 +64,11 @@ public class MapsActivity extends FragmentActivity
 
     }
     @Override
-    protected void onMapReady(map) {
+    public void onMapReady(GoogleMap map) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(NOD, 11));
 
         mImages.clear();
-        mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_nj_1922));
+        mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.nodplan));
      //   mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_prudential_sunny));
 
 
@@ -82,6 +81,11 @@ public class MapsActivity extends FragmentActivity
         // Override the default content description on the view, for accessibility mode.
         // Ideally this string would be localised.
         map.setContentDescription("Google Map with ground overlay.");
+    }
+
+    public void switchImage(View view) {
+        mCurrentEntry = (mCurrentEntry + 1) % mImages.size();
+        mGroundOverlay.setImage(mImages.get(mCurrentEntry));
     }
 
     @Override

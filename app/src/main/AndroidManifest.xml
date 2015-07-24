@@ -89,10 +89,6 @@
         </activity>
 
         <!-- Data Provider -->
-        <activity
-            android:name=".DataProvider"
-            android:label="Expandable ListView Component" >
-        </activity>
 
         <!-- Products Category List -->
         <activity

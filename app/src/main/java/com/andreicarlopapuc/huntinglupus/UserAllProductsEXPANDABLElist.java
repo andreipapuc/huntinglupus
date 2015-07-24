@@ -1,51 +1,129 @@
 package com.andreicarlopapuc.huntinglupus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.andreicarlopapuc.huntinglupus.adapters.ExpandableListAdapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.Toast;
 
 
 public class UserAllProductsEXPANDABLElist extends Activity {
-    HashMap<String, List<String>> Thing_category;
-    List<String> Thing_list;
-    ExpandableListView Exp_list;
-    ProductsCategoryList adapter;
 
-    Button btnMap;
+    List<String> groupList;
+    List<String> childList;
+    Map<String, List<String>> productCollection;
+    ExpandableListView expListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_all_products);
+        setContentView(R.layout.user_expandable);
 
-        Exp_list = (ExpandableListView) findViewById(R.id.exp_list);
-        btnMap = (Button) findViewById(R.id.btnMap);
+        createGroupList();
 
+        createCollection();
 
-        Thing_category = DataProvider.getInfo();
-        Thing_list = new ArrayList<String>(Thing_category.keySet());
-        adapter = new ProductsCategoryList(this, Thing_category, Thing_list);
-        Exp_list.setAdapter(adapter);
+        expListView = (ExpandableListView) findViewById(R.id.product_list);
+        final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
+                this, groupList, productCollection);
+        expListView.setAdapter(expListAdapter);
 
-        btnMap.setOnClickListener(new View.OnClickListener() {
+        //setGroupIndicatorToRight();
 
-            @Override
-            public void onClick(View view) {
-                // Launching All products Activity
-                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(i);
+      /*  expListView.setOnChildClickListener(new OnChildClickListener() {
 
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                final String selected = (String) expListAdapter.getChild(
+                        groupPosition, childPosition);
+                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
+                        .show();
+
+                return true;
             }
-        });
-
-
-
+        }); */
     }
+
+    private void createGroupList() {
+        groupList = new ArrayList<String>();
+        groupList.add("HP");
+        groupList.add("Dell");
+        groupList.add("Lenovo");
+        groupList.add("Sony");
+        groupList.add("HCL");
+        groupList.add("Samsung");
+    }
+
+    private void createCollection() {
+        // preparing laptops collection(child)
+        String[] hpModels = { "HP Pavilion G6-2014TX", "ProBook HP 4540",
+                "HP Envy 4-1025TX" };
+        String[] hclModels = { "HCL S2101", "HCL L2102", "HCL V2002" };
+        String[] lenovoModels = { "IdeaPad Z Series", "Essential G Series",
+                "ThinkPad X Series", "Ideapad Z Series" };
+        String[] sonyModels = { "VAIO E Series", "VAIO Z Series",
+                "VAIO S Series", "VAIO YB Series" };
+        String[] dellModels = { "Inspiron", "Vostro", "XPS" };
+        String[] samsungModels = { "NP Series", "Series 5", "SF Series" };
+
+        productCollection = new LinkedHashMap<String, List<String>>();
+
+        for (String laptop : groupList) {
+            if (laptop.equals("HP")) {
+                loadChild(hpModels);
+            } else if (laptop.equals("Dell"))
+                loadChild(dellModels);
+            else if (laptop.equals("Sony"))
+                loadChild(sonyModels);
+            else if (laptop.equals("HCL"))
+                loadChild(hclModels);
+            else if (laptop.equals("Samsung"))
+                loadChild(samsungModels);
+            else
+                loadChild(lenovoModels);
+
+            productCollection.put(laptop, childList);
+        }
+    }
+
+    private void loadChild(String[] laptopModels) {
+        childList = new ArrayList<String>();
+        for (String model : laptopModels)
+            childList.add(model);
+    }
+
+    private void setGroupIndicatorToRight() {
+        /* Get the screen width */
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+
+        expListView.setIndicatorBounds(width - getDipsFromPixel(35), width
+                - getDipsFromPixel(5));
+    }
+
+    // Convert pixel to dip
+    public int getDipsFromPixel(float pixels) {
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+        return (int) (pixels * scale + 0.5f);
+    }
+/*
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    } */
 }
