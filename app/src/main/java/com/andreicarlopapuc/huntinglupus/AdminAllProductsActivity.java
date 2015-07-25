@@ -24,7 +24,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 //General push
-// No
+// Yes
 
 public class AdminAllProductsActivity extends ListActivity {
 
