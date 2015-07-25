@@ -41,7 +41,7 @@ public class UserAllProductsExpandableList extends Activity {
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
 
-    private static String url_all_products = "http://192.168.1.11/hl_androidcon/get_all_products.php";
+    private static String url_all_products = "http://192.168.1.5/hl_androidcon/get_all_products.php";
 
 
     private static final String TAG_SUCCESS = "success";
@@ -49,7 +49,7 @@ public class UserAllProductsExpandableList extends Activity {
     private static final String TAG_IDNUM = "idnum";
     private static final String TAG_NAME = "name";
     private static final String TAG_CATEGORY = "category";
-    private static final String TAG_DESCR = "description";
+  //  private static final String TAG_DESCR = "description";
 
     // products JSONArray
     JSONArray products = null;
@@ -174,20 +174,29 @@ public class UserAllProductsExpandableList extends Activity {
                     String id = c.getString(TAG_IDNUM);
                     String name = c.getString(TAG_NAME);
                     String category = c.getString(TAG_CATEGORY);
-                    String description = c.getString(TAG_DESCR);
+                 //   String description = c.getString(TAG_DESCR);
 
-                    String[] productChildDetails = {category,description};
+                    String[] productChildDetails = {id,category};
+
+
                     loadChild(productChildDetails);
-
                     productCollection.put(name, childList);
 
                 }
+            } else {
+                // no products found
+                // Launch Add New product Activity
+                Intent i = new Intent(getApplicationContext(),
+                        NewProductActivity.class);
+                // Closing all previous activities
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        /*// preparing laptops collection(child)
+        /*
+        // preparing laptops collection(child)
         String[] hpModels = { "HP Pavilion G6-2014TX", "ProBook HP 4540",
                 "HP Envy 4-1025TX" };
         String[] hclModels = { "HCL S2101", "HCL L2102", "HCL V2002" };
@@ -220,8 +229,8 @@ public class UserAllProductsExpandableList extends Activity {
 
     private void loadChild(String[] productChildDetails) {
         childList = new ArrayList<String>();
-        for (String product : productChildDetails)
-            childList.add(product);
+        for (String details : productChildDetails)
+            childList.add(details);
     }
 
     private void setGroupIndicatorToRight() {

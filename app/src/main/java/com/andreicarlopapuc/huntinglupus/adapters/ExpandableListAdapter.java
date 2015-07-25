@@ -20,18 +20,18 @@ import java.util.Map;
  */
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context ctx;
-    private HashMap<String, List<String>> productCollections;
+    private HashMap<String, List<String>> productCollection;
     private List<String> products;
 
     public ExpandableListAdapter(Context ctx, List<String> products,
-                                 HashMap<String, List<String>> productCollections) {
+                                 HashMap<String, List<String>> productCollection) {
         this.ctx = ctx;
-        this.productCollections = productCollections;
+        this.productCollection = productCollection;
         this.products = products;
     }
 
     public Object getChild(int groupPosition, int childPosition) {
-        return productCollections.get(products.get(groupPosition)).get(childPosition);
+        return productCollection.get(products.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -44,12 +44,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         //final String products = (String) getChild(groupPosition, childPosition);
         //LayoutInflater inflater = context.getLayoutInflater();
+        LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        String products = (String)getChild(groupPosition, childPosition);
+
+        final String products = (String)getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.child_item, null);
+            convertView = inflater.inflate(R.layout.child_item,null);
         }
 
         TextView item = (TextView) convertView.findViewById(R.id.product);
@@ -59,8 +60,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    public int getChildrenCount(int arg0) {
-        return productCollections.get(products.get(arg0)).size();
+    public int getChildrenCount(int groupPosition) {
+        return productCollection.get(products.get(groupPosition)).size();
     }
 
     public Object getGroup(int arg0) {
