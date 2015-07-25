@@ -35,7 +35,7 @@ public class UserAllProductsExpandableList extends Activity {
 
     List<String> groupList;
     List<String> childList;
-    Map<String, List<String>> productCollection;
+    HashMap<String, List<String>> productCollection;
     ExpandableListView expListView;
 
     // Creating JSON Parser object
