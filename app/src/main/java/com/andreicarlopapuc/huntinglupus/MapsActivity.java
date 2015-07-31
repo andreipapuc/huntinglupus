@@ -70,7 +70,7 @@ public class MapsActivity extends FragmentActivity
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(NOD, 11));
 
         mImages.clear();
-        mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.nodplan));
+        mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.nodplan_smaller));
      //   mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_prudential_sunny));
 
 

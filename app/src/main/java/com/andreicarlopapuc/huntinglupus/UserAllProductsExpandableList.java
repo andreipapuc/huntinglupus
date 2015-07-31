@@ -40,8 +40,7 @@ public class UserAllProductsExpandableList extends Activity {
 
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
-
-    private static String url_all_products = "http://192.168.1.5/hl_androidcon/get_all_products.php";
+    private static String url_all_products = "http://10.10.11.29/hl_androidcon/get_all_products.php";
 
 
     private static final String TAG_SUCCESS = "success";
@@ -176,7 +175,7 @@ public class UserAllProductsExpandableList extends Activity {
                     String category = c.getString(TAG_CATEGORY);
                  //   String description = c.getString(TAG_DESCR);
 
-                    String[] productChildDetails = {id,category};
+                    String[] productChildDetails = {category};
 
 
                     loadChild(productChildDetails);
