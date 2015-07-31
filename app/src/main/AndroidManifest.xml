@@ -78,10 +78,6 @@
             android:label="Edit Product" >
         </activity>
         <!-- User Main Activity -->
-        <activity
-            android:name=".UserMainActivity"
-            android:label="@string/title_activity_user_main" >
-        </activity>
         <!-- Admin Main Activity -->
         <activity
             android:name=".AdminMainActivity"

@@ -20,8 +20,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+//General push
 
-public class MapsActivity extends FragmentActivity implements  OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity
+        implements  OnMapReadyCallback {
 
     private static final int TRANSPARENCY_MAX = 100;
     private static final LatLng NOD = new LatLng(44.412016, 26.118236);
@@ -69,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements  OnMapReadyCallbac
 
         mImages.clear();
         mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.nodplan_smaller));
-     //   mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_prudential_sunny));
+        //   mImages.add(BitmapDescriptorFactory.fromResource(R.drawable.newark_prudential_sunny));
 
 
         mGroundOverlay = map.addGroundOverlay(new GroundOverlayOptions()

@@ -29,7 +29,7 @@ public class MainScreenActivity extends Activity{
             @Override
             public void onClick(View view) {
                 // Launching All products Activity
-                Intent i = new Intent(getApplicationContext(), UserMainActivity.class);
+                Intent i = new Intent(getApplicationContext(), UserAllProductsExpandableList.class);
                 startActivity(i);
 
             }
@@ -50,7 +50,7 @@ public class MainScreenActivity extends Activity{
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                Intent i = new Intent(getApplicationContext(), MapTileOverlay.class);
                 startActivity(i);
             }
         });
