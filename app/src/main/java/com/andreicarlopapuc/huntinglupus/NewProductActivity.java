@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
-//General push
 
 public class NewProductActivity extends Activity {
 
@@ -31,12 +30,13 @@ public class NewProductActivity extends Activity {
     EditText inputName;
     CheckBox checkBoxCatTool;
     CheckBox checkBoxCatFurniture;
+    CheckBox checkBoxCatKey;
     EditText inputDesc;
     Button btnCreateProduct;
 
     // url set to current wamp server, replace when you get to host server on another platform
     // url to create new product
-    private static String url_create_product = "http://192.168.1.5/hl_androidcon/create_product.php";
+    private static String url_create_product = "http://www.huntinglupus.esy.es/create_product.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -51,6 +51,7 @@ public class NewProductActivity extends Activity {
         inputName = (EditText) findViewById(R.id.inputName);
         checkBoxCatTool = (CheckBox) findViewById(R.id.inputCategoryTool);
         checkBoxCatFurniture = (CheckBox) findViewById(R.id.inputCategoryFurniture);
+        checkBoxCatKey = (CheckBox) findViewById((R.id.inputCategoryKey));
         inputDesc = (EditText) findViewById(R.id.inputDesc);
 
         // Create button
@@ -72,6 +73,7 @@ public class NewProductActivity extends Activity {
             public void onClick(View arg0) {
                 if(checkBoxCatTool.isChecked()) {
                     checkBoxCatFurniture.setChecked(false);
+                    checkBoxCatKey.setChecked(false);
                 }
             }
         });
@@ -80,6 +82,17 @@ public class NewProductActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 if(checkBoxCatFurniture.isChecked()) {
+                    checkBoxCatTool.setChecked(false);
+                    checkBoxCatKey.setChecked(false);
+                }
+            }
+        });
+        // checkbox key click event
+        checkBoxCatKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if(checkBoxCatKey.isChecked()) {
+                    checkBoxCatFurniture.setChecked(false);
                     checkBoxCatTool.setChecked(false);
                 }
             }
@@ -113,9 +126,11 @@ public class NewProductActivity extends Activity {
             String name = inputName.getText().toString();
             String category;
             if(checkBoxCatTool.isChecked()) {
-                category = "tool";
+                category = "Category: Tool";
             } else if(checkBoxCatFurniture.isChecked()){
-                category = "furniture";
+                category = "Category: Furniture";
+            } else if(checkBoxCatKey.isChecked()){
+                category = "Category: Key";
             } else {
                 category = " ";
             }

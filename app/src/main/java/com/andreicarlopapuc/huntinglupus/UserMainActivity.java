@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-//General push
 
 public class UserMainActivity extends ActionBarActivity {
 
     Button btnViewProducts;
+    Button btnMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,20 @@ public class UserMainActivity extends ActionBarActivity {
 
         // Buttons
         btnViewProducts = (Button) findViewById(R.id.btnViewProducts);
+        btnMap = (Button) findViewById(R.id.btnMap);
+
+        // map click event
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Launching Maps Activity
+                Intent i = new Intent(getApplicationContext(), MapTileOverlay.class);
+                startActivity(i);
+
+            }
+        }
+
+        );
 
         // view products click event
         btnViewProducts.setOnClickListener(new View.OnClickListener() {
@@ -30,7 +44,9 @@ public class UserMainActivity extends ActionBarActivity {
                 startActivity(i);
 
             }
-        });
+        }
+
+        );
 
 
     }

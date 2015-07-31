@@ -81,7 +81,7 @@
         android:text="Tool"
         android:id="@+id/inputCategoryTool"
         android:checked="false"
-        android:textSize="17dip"
+        android:textSize="17sp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -121,12 +121,27 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17dip"
+        android:textSize="17sp"
         android:text="Furniture"
         android:id="@+id/inputCategoryFurniture"
-        android:layout_below="@+id/textView"
+        android:checked="false"
+        android:layout_above="@+id/textView3"
         android:layout_toRightOf="@+id/inputCategoryTool"
         android:layout_toEndOf="@+id/inputCategoryTool"
-        android:checked="false" />
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Key"
+        android:id="@+id/inputCategoryKey"
+        android:checked="false"
+        android:textSize="17sp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_above="@+id/textView3"
+        android:layout_toRightOf="@+id/inputCategoryFurniture"
+        android:layout_toEndOf="@+id/inputCategoryFurniture" />
 
 </RelativeLayout>

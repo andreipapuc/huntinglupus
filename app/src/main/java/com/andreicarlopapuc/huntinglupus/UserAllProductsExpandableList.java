@@ -13,6 +13,7 @@ import java.util.Map;
 import com.andreicarlopapuc.huntinglupus.adapters.ExpandableListAdapter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -29,7 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//General push
 
 public class UserAllProductsExpandableList extends Activity {
 
@@ -38,10 +38,13 @@ public class UserAllProductsExpandableList extends Activity {
     HashMap<String, List<String>> productCollection;
     ExpandableListView expListView;
 
+    // Progress Dialog
+    private ProgressDialog pDialog;
+
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
 
-    private static String url_all_products = "http://192.168.1.5/hl_androidcon/get_all_products.php";
+    private static String url_all_products = "http://www.huntinglupus.esy.es/get_all_products.php";
 
 
     private static final String TAG_SUCCESS = "success";
@@ -49,10 +52,11 @@ public class UserAllProductsExpandableList extends Activity {
     private static final String TAG_IDNUM = "idnum";
     private static final String TAG_NAME = "name";
     private static final String TAG_CATEGORY = "category";
-  //  private static final String TAG_DESCR = "description";
+    private static final String TAG_DESCR = "description";
 
     // products JSONArray
     JSONArray products = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,8 @@ public class UserAllProductsExpandableList extends Activity {
             }
         }); */
     }
+
+
 
     private void createGroupList() {
         groupList = new ArrayList<String>();
@@ -174,9 +180,9 @@ public class UserAllProductsExpandableList extends Activity {
                     String id = c.getString(TAG_IDNUM);
                     String name = c.getString(TAG_NAME);
                     String category = c.getString(TAG_CATEGORY);
-                 //   String description = c.getString(TAG_DESCR);
+                    String description = c.getString(TAG_DESCR);
 
-                    String[] productChildDetails = {id,category};
+                    String[] productChildDetails = {id, category ,description};
 
 
                     loadChild(productChildDetails);

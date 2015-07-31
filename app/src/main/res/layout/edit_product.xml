@@ -154,4 +154,17 @@
         android:layout_alignEnd="@+id/btnSave"
         android:checked="false" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Key"
+        android:id="@+id/inputCategoryKey"
+        android:layout_alignBottom="@+id/inputCategoryFurniture"
+        android:layout_alignLeft="@+id/btnDelete"
+        android:layout_alignStart="@+id/btnDelete"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:checked="false"
+        android:textSize="17sp" />
+
 </RelativeLayout>

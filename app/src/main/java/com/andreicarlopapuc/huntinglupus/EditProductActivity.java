@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
-//General push
 
 public class EditProductActivity extends Activity {
 
@@ -31,6 +30,7 @@ public class EditProductActivity extends Activity {
   //  EditText txtCreatedAt;
     CheckBox checkBoxCatTool;
     CheckBox checkBoxCatFurniture;
+    CheckBox checkBoxCatKey;
     Button btnSave;
     Button btnDelete;
     EditText inputPid;
@@ -45,13 +45,13 @@ public class EditProductActivity extends Activity {
     // url set to current wamp server, replace when you get to host server on another platform
     // single product url
     //10.10.9.216
-    private static final String url_product_detials = "http://192.168.1.5/hl_androidcon/get_product_details.php";
+    private static final String url_product_detials = "http://www.huntinglupus.esy.es/get_product_details.php";
 
     // url to update product
-    private static final String url_update_product = "http://192.168.1.5/hl_androidcon/update_product.php";
+    private static final String url_update_product = "http://www.huntinglupus.esy.es/update_product.php";
 
     // url to delete product
-    private static final String url_delete_product = "http://192.168.1.5/hl_androidcon/delete_product.php";
+    private static final String url_delete_product = "http://www.huntinglupus.esy.es/delete_product.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -80,6 +80,7 @@ public class EditProductActivity extends Activity {
         //check boxes
         checkBoxCatTool = (CheckBox) findViewById(R.id.inputCategoryTool);
         checkBoxCatFurniture = (CheckBox) findViewById(R.id.inputCategoryFurniture);
+        checkBoxCatKey = (CheckBox) findViewById(R.id.inputCategoryKey);
 
         // getting product details from intent
         Intent i = getIntent();
@@ -91,12 +92,12 @@ public class EditProductActivity extends Activity {
         new GetProductDetails().execute();
 
         // set On Click checkbox tool
-
         checkBoxCatTool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if(checkBoxCatTool.isChecked()) {
+                if (checkBoxCatTool.isChecked()) {
                     checkBoxCatFurniture.setChecked(false);
+                    checkBoxCatKey.setChecked(false);
                 }
             }
         });
@@ -106,6 +107,17 @@ public class EditProductActivity extends Activity {
             public void onClick(View arg0) {
                 if(checkBoxCatFurniture.isChecked()) {
                     checkBoxCatTool.setChecked(false);
+                    checkBoxCatKey.setChecked(false);
+                }
+            }
+        });
+        // checkbox key
+        checkBoxCatKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if(checkBoxCatKey.isChecked()) {
+                    checkBoxCatTool.setChecked(false);
+                    checkBoxCatFurniture.setChecked(false);
                 }
             }
         });
@@ -188,6 +200,7 @@ public class EditProductActivity extends Activity {
 
                             checkBoxCatTool = (CheckBox) findViewById(R.id.inputCategoryTool);
                             checkBoxCatFurniture = (CheckBox) findViewById(R.id.inputCategoryFurniture);
+                            checkBoxCatKey = (CheckBox) findViewById(R.id.inputCategoryKey);
                             inputPid = (EditText) findViewById(R.id.inputPid);
                             txtName = (EditText) findViewById(R.id.inputName);
                             //txtCategory = (EditText) findViewById(R.id.inputCategory);
@@ -196,17 +209,17 @@ public class EditProductActivity extends Activity {
                             // display product data in EditText
                             txtName.setText(product.getString(TAG_NAME));
                             inputPid.setText(product.getString(TAG_PID));
-                            if(product.getString(TAG_CATEGORY).equals("tool")) {
+                            if(product.getString(TAG_CATEGORY).equals("Category: Tool")) {
                                 checkBoxCatTool.setChecked(true);
 
-
-                            } else if(product.getString(TAG_CATEGORY).equals("furniture")) {
+                            } else if(product.getString(TAG_CATEGORY).equals("Category: Furniture")) {
                                 checkBoxCatFurniture.setChecked(true);
 
 
-                            } else {
-                                checkBoxCatFurniture.setChecked(false);
-                                checkBoxCatTool.setChecked(false);
+                            } else if(product.getString(TAG_CATEGORY).equals("Category: Key")) {
+                                checkBoxCatKey.setChecked(true);
+
+
                             }
 
                            // txtCategory.setText(product.getString(TAG_CATEGORY));
@@ -261,9 +274,11 @@ public class EditProductActivity extends Activity {
             String name = txtName.getText().toString();
             String category;
             if(checkBoxCatTool.isChecked()) {
-                category = "tool";
+                category = "Category: Tool";
             } else if(checkBoxCatFurniture.isChecked()) {
-                category = "furniture";
+                category = "Category: Furniture";
+            } else if(checkBoxCatKey.isChecked()) {
+                category = "Category: Key";
             } else {
                 category = " ";
             }

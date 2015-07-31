@@ -31,7 +31,6 @@ import android.util.Log;
 
 */
 
-//General push
 
 public class JSONParser {
 

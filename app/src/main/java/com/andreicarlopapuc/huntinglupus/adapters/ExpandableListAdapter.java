@@ -90,7 +90,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     public boolean hasStableIds() {
-        return true;
+        return false;
     }
 
     public boolean isChildSelectable(int ar0, int arg1) {
