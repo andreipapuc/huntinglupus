@@ -13,14 +13,19 @@ import java.util.Map;
 import com.andreicarlopapuc.huntinglupus.adapters.ExpandableListAdapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
@@ -37,6 +42,7 @@ public class UserAllProductsExpandableList extends Activity {
     List<String> childList;
     HashMap<String, List<String>> productCollection;
     ExpandableListView expListView;
+    Button  btnMapSearch;
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -74,15 +80,51 @@ public class UserAllProductsExpandableList extends Activity {
         createCollection();
 
         expListView = (ExpandableListView) findViewById(R.id.product_list);
+        //btnMapSearch = (Button) findViewById(R.id.btnMapSearch);
         final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
                 this, groupList, productCollection);
         expListView.setAdapter(expListAdapter);
+        expListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+                    int groupPosition = ExpandableListView.getPackedPositionGroup(id);
+                    String groupName = groupList.get(groupPosition);
+                    // int childPosition = ExpandableListView.getPackedPositionChild(id);
+
+                    new AlertDialog.Builder(UserAllProductsExpandableList.this)
+                            .setTitle("Map Request")
+                            .setMessage("Are you sure you want to find this item '"+groupName +"' on map?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with parsing data to mapsactivity class
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_info)
+                            .show();
+
+
+
+                    // Return true as we are handling the event.
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+
 
         //setGroupIndicatorToRight();
 
-      /*  expListView.setOnChildClickListener(new OnChildClickListener() {
+       /* expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
-            public boolean onChildClick(ExpandableListView parent, View v,
+            public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
                 final String selected = (String) expListAdapter.getChild(
                         groupPosition, childPosition);
@@ -96,7 +138,7 @@ public class UserAllProductsExpandableList extends Activity {
 
 
 
-    private void createGroupList() {
+    public void createGroupList() {
         groupList = new ArrayList<String>();
 
         // Building Parameters
@@ -182,7 +224,7 @@ public class UserAllProductsExpandableList extends Activity {
                     String category = c.getString(TAG_CATEGORY);
                     String description = c.getString(TAG_DESCR);
 
-                    String[] productChildDetails = {id, category ,description};
+                    String[] productChildDetails = {category ,description};
 
 
                     loadChild(productChildDetails);
