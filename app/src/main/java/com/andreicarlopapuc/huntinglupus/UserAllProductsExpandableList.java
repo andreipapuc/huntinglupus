@@ -31,6 +31,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 public class UserAllProductsExpandableList extends Activity {
 
     List<String> groupList;
+    List<String> productPids;
     List<String> childList;
     HashMap<String, List<String>> productCollection;
     ExpandableListView expListView;
@@ -51,11 +53,13 @@ public class UserAllProductsExpandableList extends Activity {
     JSONParser jParser = new JSONParser();
 
     private static String url_all_products = "http://www.huntinglupus.esy.es/get_all_products.php";
+    private static String url_pid_upload = "http://www.huntinglupus.esy.es/findbypidcommit.php";
 
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PRODUCTS = "products";
     private static final String TAG_IDNUM = "idnum";
+    private static final String TAG_PID = "pid";
     private static final String TAG_NAME = "name";
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_DESCR = "description";
@@ -84,20 +88,36 @@ public class UserAllProductsExpandableList extends Activity {
         final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
                 this, groupList, productCollection);
         expListView.setAdapter(expListAdapter);
+
+        // long press on group item and pop up dialog box
         expListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
                     int groupPosition = ExpandableListView.getPackedPositionGroup(id);
+                    // fetch name of the group from the group position
                     String groupName = groupList.get(groupPosition);
+                    // fetch pid of the selected product
+                   final String productPid = productPids.get(groupPosition);
                     // int childPosition = ExpandableListView.getPackedPositionChild(id);
 
                     new AlertDialog.Builder(UserAllProductsExpandableList.this)
                             .setTitle("Map Request")
-                            .setMessage("Are you sure you want to find this item '"+groupName +"' on map?")
+                            .setMessage("Are you sure you want to find this item '"+groupName+"' on map?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // continue with parsing data to mapsactivity class
+                                    // stream data to php to let udoo take it
+
+                                        // Building Parameters
+                                        List<NameValuePair> params = new ArrayList<NameValuePair>();
+                                        params.add(new BasicNameValuePair("pid", productPid));
+
+                                        // getting product details by making HTTP request
+                                        // Note that product details url will use GET request
+                                        JSONObject json = jParser.makeHttpRequest(
+                                                url_pid_upload, "GET", params);
+
+
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -105,10 +125,8 @@ public class UserAllProductsExpandableList extends Activity {
                                     // do nothing
                                 }
                             })
-                            .setIcon(android.R.drawable.ic_dialog_info)
+                            .setIcon(R.drawable.huskybitslogonull)
                             .show();
-
-
 
                     // Return true as we are handling the event.
                     return true;
@@ -120,26 +138,13 @@ public class UserAllProductsExpandableList extends Activity {
 
 
 
-        //setGroupIndicatorToRight();
-
-       /* expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                final String selected = (String) expListAdapter.getChild(
-                        groupPosition, childPosition);
-                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
-                        .show();
-
-                return true;
-            }
-        }); */
     }
 
 
 
     public void createGroupList() {
         groupList = new ArrayList<String>();
+        productPids = new ArrayList<String>();
 
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -164,9 +169,11 @@ public class UserAllProductsExpandableList extends Activity {
 
                     // Storing each json item in variable
                     String id = c.getString(TAG_IDNUM);
+                    String pid = c.getString(TAG_PID);
                     String name = c.getString(TAG_NAME);
 
                     groupList.add(name);
+                    productPids.add(pid);
 
 
 
@@ -195,7 +202,7 @@ public class UserAllProductsExpandableList extends Activity {
 
     }
 
-    private void createCollection() {
+    public void createCollection() {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         // getting JSON string from URL
         JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
@@ -225,6 +232,7 @@ public class UserAllProductsExpandableList extends Activity {
                     String description = c.getString(TAG_DESCR);
 
                     String[] productChildDetails = {category ,description};
+
 
 
                     loadChild(productChildDetails);
