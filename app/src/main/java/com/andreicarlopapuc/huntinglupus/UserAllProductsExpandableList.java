@@ -80,7 +80,6 @@ public class UserAllProductsExpandableList extends Activity {
         }
 
         createGroupList();
-
         createCollection();
 
         expListView = (ExpandableListView) findViewById(R.id.product_list);
@@ -107,17 +106,7 @@ public class UserAllProductsExpandableList extends Activity {
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // stream data to php to let udoo take it
-
-                                        // Building Parameters
-                                        List<NameValuePair> params = new ArrayList<NameValuePair>();
-                                        params.add(new BasicNameValuePair("pid", productPid));
-
-                                        // getting product details by making HTTP request
-                                        // Note that product details url will use GET request
-                                        JSONObject json = jParser.makeHttpRequest(
-                                                url_pid_upload, "GET", params);
-
-
+                                    uploadPid(productPid);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -281,6 +270,40 @@ public class UserAllProductsExpandableList extends Activity {
 
             productCollection.put(laptop, childList);
         } */
+    }
+
+    private void uploadPid(final String productPid) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                // Check for success tag
+                int success;
+                try {
+                    // Building Parameters
+                    List<NameValuePair> params = new ArrayList<NameValuePair>();
+                    params.add(new BasicNameValuePair("pid", productPid));
+
+                    // getting product details by making HTTP request
+                    // Note that product details url will use GET request
+                    JSONObject json = jParser.makeHttpRequest(
+                            url_pid_upload, "GET", params);
+
+                    // check your log for json response
+                    Log.d("Single Product Details", json.toString());
+
+                    // json success tag
+                    success = json.getInt(TAG_SUCCESS);
+                    if (success == 1) {
+                        // successfully received product details
+
+                    }else{
+                        // product with idnum not found
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     private void loadChild(String[] productChildDetails) {
