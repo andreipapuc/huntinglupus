@@ -24,7 +24,7 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
 
     /** This returns moon tiles. */
     private static final String MOON_MAP_URL_FORMAT =
-            "http://www.huntinglupus.esy.es/tiles2/%d/%d/%d.png";
+            "http://www.huntinglupus.esy.es/tilesFINAL/%d/%d/%d.png";
 
     private TileOverlay mMoonTiles;
 
@@ -46,8 +46,8 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
             @Override
             public synchronized URL getTileUrl(int x, int y, int zoom) {
                 // The moon tile coordinate system is reversed.  This is not normal.
-                int reversedY = (1 << zoom) - y - 1;
-                String s = String.format(Locale.US, MOON_MAP_URL_FORMAT, zoom, x, reversedY);
+                //int reversedY = (1 << zoom) - y - 1;
+                String s = String.format(Locale.US, MOON_MAP_URL_FORMAT, zoom, x, y);
                 URL url = null;
                 try {
                     url = new URL(s);
