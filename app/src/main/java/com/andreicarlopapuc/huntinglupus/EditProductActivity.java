@@ -45,7 +45,7 @@ public class EditProductActivity extends Activity {
     // url set to current wamp server, replace when you get to host server on another platform
     // single product url
     //10.10.9.216
-    private static final String url_product_detials = "http://www.huntinglupus.esy.es/get_product_details.php";
+    private static final String url_product_details = "http://www.huntinglupus.esy.es/get_product_details.php";
 
     // url to update product
     private static final String url_update_product = "http://www.huntinglupus.esy.es/update_product.php";
@@ -180,7 +180,7 @@ public class EditProductActivity extends Activity {
                         // getting product details by making HTTP request
                         // Note that product details url will use GET request
                         JSONObject json = jsonParser.makeHttpRequest(
-                                url_product_detials, "GET", params);
+                                url_product_details, "GET", params);
 
                         // check your log for json response
                         Log.d("Single Product Details", json.toString());

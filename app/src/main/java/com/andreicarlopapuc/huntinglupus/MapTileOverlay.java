@@ -65,6 +65,5 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
         if (mMoonTiles == null) {
             return;
         }
-        mMoonTiles.setFadeIn(((CheckBox) v).isChecked());
     }
 }
