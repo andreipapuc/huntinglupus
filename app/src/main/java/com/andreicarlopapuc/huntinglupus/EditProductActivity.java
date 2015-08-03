@@ -41,7 +41,7 @@ public class EditProductActivity extends Activity {
     private ProgressDialog pDialog;
 
     // JSON parser class
-    JSONParser jsonParser = new JSONParser();
+    com.andreicarlopapuc.huntinglupus.JSONParser jsonParser = new JSONParser();
     // url set to current wamp server, replace when you get to host server on another platform
     // single product url
     //10.10.9.216
@@ -197,6 +197,7 @@ public class EditProductActivity extends Activity {
 
                             // product with this idnum found
                             // Edit Text
+
 
                             checkBoxCatTool = (CheckBox) findViewById(R.id.inputCategoryTool);
                             checkBoxCatFurniture = (CheckBox) findViewById(R.id.inputCategoryFurniture);

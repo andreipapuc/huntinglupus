@@ -41,6 +41,7 @@ public class UserAllProductsExpandableList extends Activity {
 
     List<String> groupList;
     List<String> productPids;
+    List<String> productIdnums;
     List<String> childList;
     HashMap<String, List<String>> productCollection;
     ExpandableListView expListView;
@@ -98,15 +99,19 @@ public class UserAllProductsExpandableList extends Activity {
                     String groupName = groupList.get(groupPosition);
                     // fetch pid of the selected product
                    final String productPid = productPids.get(groupPosition);
+                   final String productIdnum = productIdnums.get(groupPosition);
                     // int childPosition = ExpandableListView.getPackedPositionChild(id);
 
-                    new AlertDialog.Builder(UserAllProductsExpandableList.this)
+                    final AlertDialog show = new AlertDialog.Builder(UserAllProductsExpandableList.this)
                             .setTitle("Map Request")
-                            .setMessage("Are you sure you want to find this item '"+groupName+"' on map?")
+                            .setMessage("Are you sure you want to find this item '" + groupName + "' on map?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // stream data to php to let udoo take it
                                     uploadPid(productPid);
+                                    Intent intent = new Intent(getApplicationContext(), MapTileOverlay.class);
+                                    intent.putExtra("key",productIdnum);
+                                    startActivity(intent);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -134,6 +139,7 @@ public class UserAllProductsExpandableList extends Activity {
     public void createGroupList() {
         groupList = new ArrayList<String>();
         productPids = new ArrayList<String>();
+        productIdnums = new ArrayList<String>();
 
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -163,6 +169,7 @@ public class UserAllProductsExpandableList extends Activity {
 
                     groupList.add(name);
                     productPids.add(pid);
+                    productIdnums.add(id);
 
 
 
