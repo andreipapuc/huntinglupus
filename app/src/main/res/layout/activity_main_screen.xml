@@ -50,8 +50,8 @@
         android:layout_below="@+id/textHuntingLupus"
         android:layout_centerHorizontal="true" />
     <ImageView
-        android:layout_width="155dp"
-        android:layout_height="142dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:id="@+id/imageView"
         android:layout_weight="0.14"
         android:src="@drawable/huskybitslogonull"
@@ -63,28 +63,20 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="User Mode"
+        android:layout_marginTop="32dp"
         android:layout_below="@+id/imageView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp" />
+        android:layout_alignParentStart="true" />
 
     <!--  Button to create a new product screen -->
     <Button android:id="@+id/btnAdminMode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Admin Mode"
+        android:layout_marginTop="27dp"
         android:layout_below="@+id/btnUserMode"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:text="Map"
-        android:id="@+id/btnMap"
-        android:layout_weight="0"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"

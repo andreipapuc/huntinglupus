@@ -37,8 +37,9 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
 
     /** This returns moon tiles. */
     private static final String NOD_MAP_URL_FORMAT =
-            "http://www.huntinglupus.esy.es/tilesHighRes/%d/%d/%d.jpg";    //Higher res
-            //"http://www.huntinglupus.esy.es/tilesLowRes/%d/%d/%d.jpg";
+            //"http://www.huntinglupus.esy.es/tilesHighRes/%d/%d/%d.jpg";    //Higher res
+            //"http://www.huntinglupus.esy.es/tilesHighRes2/%d/%d/%d.jpg";
+            "http://www.huntinglupus.esy.es/tilesLowRes/%d/%d/%d.jpg";
 
     private static String url_product_details = "http://www.huntinglupus.esy.es/get_product_details.php";
 
