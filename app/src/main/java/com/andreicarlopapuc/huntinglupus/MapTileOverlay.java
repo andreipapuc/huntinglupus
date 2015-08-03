@@ -24,7 +24,8 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
 
     /** This returns moon tiles. */
     private static final String MOON_MAP_URL_FORMAT =
-            "http://www.huntinglupus.esy.es/tilesHighRes/%d/%d/%d.jpg";
+            "http://www.huntinglupus.esy.es/tilesHighRes/%d/%d/%d.jpg";    //Higher res
+            //"http://www.huntinglupus.esy.es/tilesLowRes/%d/%d/%d.jpg";
 
     private TileOverlay mMoonTiles;
 
