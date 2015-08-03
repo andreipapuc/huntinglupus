@@ -50,33 +50,35 @@
         android:layout_below="@+id/textHuntingLupus"
         android:layout_centerHorizontal="true" />
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="220dp"
+        android:layout_height="200dp"
         android:id="@+id/imageView"
         android:layout_weight="0.14"
         android:src="@drawable/huskybitslogonull"
-        android:paddingTop="20dp"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
         android:layout_below="@+id/textMotto"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
 
     <Button android:id="@+id/btnUserMode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="User Mode"
-        android:layout_marginTop="32dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/textVersion"
+        android:layout_alignEnd="@+id/textVersion"
+        android:layout_marginTop="10dp" />
 
     <!--  Button to create a new product screen -->
     <Button android:id="@+id/btnAdminMode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Admin Mode"
-        android:layout_marginTop="27dp"
         android:layout_below="@+id/btnUserMode"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/textVersion"
+        android:layout_alignEnd="@+id/textVersion"
+        android:layout_marginTop="13dp" />
 
     <TextView
         android:layout_width="wrap_content"
