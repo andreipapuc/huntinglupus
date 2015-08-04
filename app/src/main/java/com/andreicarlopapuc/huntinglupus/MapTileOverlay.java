@@ -1,5 +1,6 @@
 package com.andreicarlopapuc.huntinglupus;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -73,7 +74,9 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
         Intent intent = getIntent();
         String valueIdnum = intent.getStringExtra("key");
         getXyz(valueIdnum);
-        map.addMarker(new MarkerOptions().position(new LatLng(fx,fy)).title(name));
+        map.addMarker(new MarkerOptions().position(new LatLng(fx, fy)).title(name));
+        final LatLng Product = new LatLng(fx, fy);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(Product, 1));
 
         TileProvider tileProvider = new UrlTileProvider(256, 256) {
             @Override
