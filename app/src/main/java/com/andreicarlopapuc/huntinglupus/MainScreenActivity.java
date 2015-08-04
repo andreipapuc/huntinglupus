@@ -44,13 +44,5 @@ public class MainScreenActivity extends Activity{
 
             }
         });
-
-       /* btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), MapTileOverlay.class);
-                startActivity(i);
-            }
-        }); */
     }
 }
