@@ -4,6 +4,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
@@ -66,6 +68,7 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -74,10 +77,18 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
         Intent intent = getIntent();
         String valueIdnum = intent.getStringExtra("key");
         getXyz(valueIdnum);
+
+        //Move camera to pin
         map.addMarker(new MarkerOptions().position(new LatLng(fx, fy)).title(name));
         final LatLng Product = new LatLng(fx, fy);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(Product, 1));
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(Product)
+                .zoom(1)
+                .build();
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(Product, 1));
 
+        //Load tiles
         TileProvider tileProvider = new UrlTileProvider(256, 256) {
             @Override
             public synchronized URL getTileUrl(int x, int y, int zoom) {
@@ -96,13 +107,9 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
 
         mCustomTiles = map.addTileOverlay(new TileOverlayOptions().tileProvider(tileProvider));
 
-
-
-
-
-
     }
 
+    //Show product on map
     private void getXyz(final String productIdnum) {
         runOnUiThread(new Runnable() {
             public void run() {
@@ -137,9 +144,6 @@ public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallba
 
                         fx = Float.parseFloat(x);
                         fy = Float.parseFloat(y);
-
-
-
 
                     }else{
                         // product with idnum not found
