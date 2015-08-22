@@ -45,13 +45,13 @@ public class EditProductActivity extends Activity {
     // url set to current wamp server, replace when you get to host server on another platform
     // single product url
     //10.10.9.216
-    private static final String url_product_details = "http://www.huntinglupus.esy.es/get_product_details.php";
+    private static final String url_product_details = "http://46.101.186.73/get_product_details.php";
 
     // url to update product
-    private static final String url_update_product = "http://www.huntinglupus.esy.es/update_product.php";
+    private static final String url_update_product = "http://46.101.186.73/update_product.php";
 
     // url to delete product
-    private static final String url_delete_product = "http://www.huntinglupus.esy.es/delete_product.php";
+    private static final String url_delete_product = "http://46.101.186.73/delete_product.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";

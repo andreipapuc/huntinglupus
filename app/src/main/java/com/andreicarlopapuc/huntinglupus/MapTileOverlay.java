@@ -39,9 +39,9 @@ import java.util.Locale;
 public class MapTileOverlay extends FragmentActivity implements OnMapReadyCallback {
 
     /** This returns moon tiles. */
-    private static final String NOD_MAP_URL_FORMAT = "http://www.huntinglupus.esy.es/tiles/%d/%d/%d.jpg";
+    private static final String NOD_MAP_URL_FORMAT = "http://46.101.186.73/tiles/%d/%d/%d.jpg";
 
-    private static String url_product_details = "http://www.huntinglupus.esy.es/get_product_details.php";
+    private static String url_product_details = "http://46.101.186.73/get_product_details.php";
 
     private static final String TAG_NAME = "name";
     private static final String TAG_IDNUM = "idnum";
